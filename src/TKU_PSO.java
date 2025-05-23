@@ -26,9 +26,8 @@ public class TKU_PSO {
 
 
     //file paths
-    final String dataset = "kosarak";
-    final String input = "D:\\Documents\\Skole\\Master\\Work\\" + dataset + ".txt"; //input file path
-    final String output = "D:\\Documents\\Skole\\Master\\Work\\out.txt"; //output file path
+    private final String input;  // input file path
+    private final String output; // output file path
 
     //Algorithm parameters
     final int pop_size = 20; // the size of the population
@@ -152,6 +151,16 @@ public class TKU_PSO {
             return sol.size();
         }
 
+    }
+
+    /**
+     * Constructor that takes input and output file paths
+     * @param inputFile Path to the input database file in SPMF format
+     * @param outputFile Path where the discovered patterns will be written
+     */
+    public TKU_PSO(String inputFile, String outputFile) {
+        this.input = inputFile;
+        this.output = outputFile;
     }
 
     /**
