@@ -30,11 +30,16 @@ public class TKU_PSO {
     private final String output; // output file path
 
     //Algorithm parameters
-    final int pop_size = 20; // the size of the population
-    final int iterations = 10000; // the number of iterations before termination
-    final int k = 1000; //the desired number of top-k HUIs
-    final boolean avgEstimate = true; //true: use average estimates, false: use maximum estimates
-    //avgEstimate should always be true if you are comparing to this algorithm
+    private final int pop_size; // the size of the population
+    private final int iterations; // the number of iterations before termination
+    private final int k; //the desired number of top-k HUIs
+    private final boolean avgEstimate; //true: use average estimates, false: use maximum estimates
+
+    // Default values for algorithm parameters
+    private static final int DEFAULT_POP_SIZE = 20;
+    private static final int DEFAULT_ITERATIONS = 10000;
+    private static final int DEFAULT_K = 1000;
+    private static final boolean DEFAULT_AVG_ESTIMATE = true;
 
     //stats
     double maxMemory; // the maximum memory usage
@@ -154,13 +159,30 @@ public class TKU_PSO {
     }
 
     /**
-     * Constructor that takes input and output file paths
+     * Constructor that takes input and output file paths with default algorithm parameters
      * @param inputFile Path to the input database file in SPMF format
      * @param outputFile Path where the discovered patterns will be written
      */
     public TKU_PSO(String inputFile, String outputFile) {
+        this(inputFile, outputFile, DEFAULT_POP_SIZE, DEFAULT_ITERATIONS, DEFAULT_K, DEFAULT_AVG_ESTIMATE);
+    }
+
+    /**
+     * Constructor that takes input and output file paths and algorithm parameters
+     * @param inputFile Path to the input database file in SPMF format
+     * @param outputFile Path where the discovered patterns will be written
+     * @param popSize Population size for PSO
+     * @param iterations Number of iterations before termination
+     * @param k Number of desired top-k HUIs
+     * @param avgEstimate Whether to use average estimates (true) or maximum estimates (false)
+     */
+    public TKU_PSO(String inputFile, String outputFile, int popSize, int iterations, int k, boolean avgEstimate) {
         this.input = inputFile;
         this.output = outputFile;
+        this.pop_size = popSize;
+        this.iterations = iterations;
+        this.k = k;
+        this.avgEstimate = avgEstimate;
     }
 
     /**
